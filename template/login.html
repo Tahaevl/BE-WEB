@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr" >
+
+
+
+
+	<link rel="stylesheet" type="text/css" href="../static/css/connexion.css"/>
+	
+	
+
+		<div class="connexion">
+		<div class="container" id="container">
+		  <div class="form-container sign-up-container">
+			<form method="post" action="/inscription">
+			  <h1>Inscription</h1>
+			  <br />
+			  <select name="monSelect" aria-label="monSelect">
+				<option selected disabled>
+					Statut
+				</option>
+				<option value="Gestionnaire">Gestionnaire</option>
+				<option value="Administrateur">Administrateur</option>
+			  </select>
+			  <input type="text" name='nom' placeholder="Nom" required />
+			  <input type="text" name='prénom' placeholder="Prénom" required />
+			  <input type="email" name='mail' placeholder="Email" required />
+			  <span style="font-size: 10px;color:#8d8aba"> Le mot de passe doit de préférence contenir au minimum 8 caractères, à savoir : au moins une lettre minuscule et une lettre majuscule, un caractère spécial et un chiffre.</span>
+			  <input type="password" pattern="/^(?=.*[a-z])(?=.*[A-Z]).{8,2}$/" name="password" id="password" onchange='check_pass();' placeholder="Mot de passe"  required /> 
+			  <input type="password" name="confirm_password" id="confirm_password" onchange='check_pass();' placeholder="Retapper le mot de passe" required /><span id='message'></span>
+			  <input type="submit" name="submit"  value="S'inscrire"  id="submit" disabled />
+			</form>
+		  </div>
+		  <div class="form-container sign-in-container">
+			<form method="post" action="/connecter">
+			  <h1>Connexion</h1>
+			  <br />
+			  <input name='mail' type="email" placeholder="Email" />
+			  <input name='password' type="password" placeholder="Mot de passe" />
+			  <br />
+			  <button>Se connecter</button>
+			</form>
+		  </div>
+		  <div class="overlay-container">
+			<div class="overlay">
+			  <div class="overlay-panel overlay-left">
+				<h1>Déjà inscrit?</h1>
+				<p>Accédez à votre compte!</p>
+				<button class="ghost" id="signIn">Se connecter</button>
+			  </div>
+			  <div class="overlay-panel overlay-right">
+				<h1>Bienvenue!</h1>
+				<p>Nouveau ? Venez créer votre compte pour profiter de nos services !</p>
+				<button class="ghost" id="signUp">S'inscrire</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		</div>
+		<!-- partial -->
+		<script  src="../static/js/connexion.js"></script>
+		<script>
+				function check_pass() {
+			if (document.getElementById('password').value ==
+					document.getElementById('confirm_password').value) {
+				document.getElementById('submit').disabled = false;
+				document.getElementById('submit').style.backgroundColor= '#B1CFA5';
+				document.getElementById('message').style.color = '#B1CFA5';
+				document.getElementById('message').innerHTML = ' ';
+			} else {
+				document.getElementById('submit').disabled = true;
+				document.getElementById('submit').style.backgroundColor= '#f1f1f1';
+				document.getElementById('submit').style.color= '#0002';
+				document.getElementById('message').style.color = '#f00';
+				document.getElementById('message').innerHTML = 'Mots de passe non identiques';
+			}
+		}
+		</script>
+</html>
