@@ -101,9 +101,15 @@ def insert(dic):
         semiMinorAxis = (n**2*Gearth)**(1/3)
         e = y.e
         semiMajorAxis = semiMinorAxis*(1-e**2)**(1/2)
-        mydb.execute("INSERT INTO 'satellites' (idSatelitte ,nomSatelitte ,category ,orbite ,longitude ,latitude ,altitude ,inclinaison ,longitudeNoeud ,anomalieMoyenne ,semiMajorAxis ,semiMinorAxis ,arg ,source ,idUser, idPays) VALUES (:idSatelitte ,:nomSatelitte ,:category ,:orbite ,:longitude ,:latitude ,:altitude ,:inclinaison ,:longitudeNoeud ,:anomalieMoyenne ,:semiMajorAxis ,:semiMinorAxis ,:arg ,:source ,:idUser, :idPays)", [ids,x,category,y.orbit,y.lon,y.lat,y.elevation,y.inc,y._Om,y._M, semiMajorAxis,semiMinorAxis, y.ap, 'celestrak',NULL,NULL ])
+        cursor = mydb.cursor()
+        sql = "INSERT INTO 'satellites' ('idSatelitte' ,'nomSatelitte' ,'category' ,'orbite' ,'longitude' ,'latitude' ,'altitude' ,'inclinaison' ,'longitudeNoeud' ,'anomalieMoyenne' ,'semiMajorAxis' ,'semiMinorAxis' ,'arg' ,'source' ,'idUser', 'idPays') VALUES (%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s,%s ,%s ,%s ,%s ,%s, %s) ;"
+        param = (ids,x,category,y.orbit,y.lon,y.lat,y.elevation,y.inc,y._Om,y._M, semiMajorAxis,semiMinorAxis, y.ap, 'celestrak',NULL,NULL )
+        cursor.execute(sql,param)
+        mydb.commit()
         ids +=1
-        
+    cursor.close()
+
+
 insert(last_30_days)
 insert(space_stations)
 insert(brightest)
@@ -162,5 +168,6 @@ insert(other)
 
 
 
+mydb.close()
 
 
