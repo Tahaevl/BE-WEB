@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,session, redirect, url_for
 from .model import bdd
-from .controller import function as f
+from .controller import function as f,formulaire_connexion as fc
 app = Flask(__name__)
 app.template_folder = 'template'
 app.static_folder = 'static'
@@ -27,12 +27,24 @@ def GPS():
 def authentification():
     return render_template("login.html")
 
-@app.route('/connecter', methods=["POST"])
+@app.route("/deconnexion")
+def deconnexion():
+    session.clear()
+    return redirect(url_for('index'))
+
+
+@app.route("/connecter",methods=['POST'])
 def connecter():
-    print(request.form)
-    mail=request.form['mail']
-    password=request.form['password']
-    verifAuthData(mail , password)
+    msg1= bdd.refresh_all()
+    msg= fc.verifAuth(request)
+    if msg == "erreur":
+        return render_template("login.html", info="erreur")
+    else: return redirect(url_for('index'))
+
+@app.route("/inscription", methods=['POST'])
+def inscription():
+    msg=fc.addUtilisateur(request)
+    return redirect(url_for('index'))
     
 
     
