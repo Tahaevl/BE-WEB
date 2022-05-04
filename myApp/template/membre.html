@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include("layout/head.html") %}
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" />
+  <link href="/static/css/my.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+  <!-- ======= Header ======= -->
+  {% include("layout/nav.html") %}
+<!-- End Header -->
+
+{% if info and info == "delOK" %}
+  <div class="alert alert-success text-center">
+    L'utilisateur a bien été supprimé
+  </div>
+{% endif %}
+{% if info and info == "delProblem" %}
+  <div class="alert alert-danger text-center">
+    Problème avec la suppression de l'utilisateur
+  </div>
+{% endif %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    {% set ssmenu="" %}
+    {% set smenu="membre" %}
+    {% include("layout/breadcrumbs.html") %}
+  </main><!-- End #main -->
+
+  {% if infoErr and infoErr != "OKmembres" %}
+  <div class="alert alert-danger">
+  {{info}}</div>
+  {% endif %}
+  {% if liste %}
+
+  <table class="table">
+    <thead>
+    <tr>
+    <th>Supp</th>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Mail</th>
+    <th>Statut</th>
+    </tr>
+    </thead>
+
+    <tbody>
+      {% for user in liste %}
+      <tr>
+      <td>
+        <a style="color:red" href="/suppMembre?userDel={{user.idUser}}">
+          Supprimer
+        </a>
+      </td>
+      <td>{{ user.nom }}</td>
+      <td>{{ user.prenom }}</td>
+      <td>{{ user.mail }}</td>
+      <td class='modifSelect' data-url = 'updateMembre'
+      data-name= 'statut' data-pk='{{user.idUser}}'>
+      {% if user.statut == 1 %}
+      Administrateur
+      {% elif user.statut == 0 %}
+      Gestionnaire
+      {%else%}
+      Utilisateur
+      {% endif %}
+      </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+      </table>
+
+
+
+
+
+
+  {% endif %}
+
+
+
+  <!-- ======= Footer ======= -->
+  {% include("layout/footer.html") %}
+  <!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  {% include("layout/scripts.html") %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+  <script>
+    $.fn.editable.defaults.mode = 'inline'
+    $(".modif").editable()
+    $(".modifSelect").editable({
+    type: 'select',
+    source: [
+    { value: 1, text: 'Administrateur' },
+    { value: 0, text: 'Gestionnaire' },
+    { value: -1, text: 'Utilisateur'}
+    ]
+    })
+    </script>
+</body>
+
+</html>

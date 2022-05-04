@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include("layout/head.html") %}
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="fixed-top d-flex align-items-center topbar-inner-pages">
+    <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">info@example.com</a>
+        <i class="bi bi-phone-fill phone-icon"></i> +1 5589 55488 55
+      </div>
+      <div class="cta d-none d-md-block">
+        <a href="#about" class="scrollto">Get Started</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+  {% include("layout/nav.html") %}
+  <!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    {% set smenu="Détails GPS" %}
+    {% set ssmenu="" %}
+    {% include("layout/breadcrumbs.html") %}
+    
+    <!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <img src="/static/img/portfolio/GPS-2.jpg" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="/static/img/portfolio/GPS-3.jpg" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="/static/img/portfolio/GPS-4.jpg" alt="">
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info">
+              <h3>Informations</h3>
+              <ul>
+                <li><strong>Categorie</strong>: Navigation</li>
+                <li><strong>Client</strong>:Département de la défense des Etats unis</li>
+                <li><strong>Premier lancement</strong>: 1978</li>
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <h2>Global positioning System</h2>
+              <p>
+                Le GPS(Système de positionnement global) est un...
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include("layout/footer.html") %}
+  <!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  {% include("layout/scripts.html") %}
+
+</body>
+
+</html>
