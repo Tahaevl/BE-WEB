@@ -132,7 +132,7 @@ def insert(dic):
             # sql1 = "TRUNCATE TABLE identification;"
             # cursor.execute(sql1)
             # insertion des nouvelles données
-        category = NULL
+        category = "{}".format(dic)
         n = float(y.n)*2*ma.pi/86400
         semiMinorAxis = (n**2*Gearth)**(1/3)
         e = y.e
